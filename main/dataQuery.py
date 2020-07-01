@@ -32,4 +32,5 @@ def main():
 
 if __name__ == "__main__":
     #main()
+    app.debug=True
     app.run()
