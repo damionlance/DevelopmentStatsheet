@@ -15,8 +15,8 @@ def hello():
 def getPlayerPPG(lastname):
 	if request.method == 'GET':
 		lastname = request.args['lastname']
-	    playerBox = getPlayerBox(lastname)
-	    ppg = sum(playerBox.get('PTS'))/len(playerBox.index)
+        playerBox = getPlayerBox(lastname)
+        ppg = sum(playerBox.get('PTS'))/len(playerBox.index)
 	return ppg
 
 def getPlayerIDFromFullName(fullName):
