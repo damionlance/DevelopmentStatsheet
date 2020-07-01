@@ -12,12 +12,12 @@ def hello():
 
 
 @app.route('/api/v1/ppg', methods=['GET'])
-def getPlayerPPG(lastname):
-	if request.method == 'GET':
-		lastname = request.args['lastname']
+def getPlayerPPG():
+    if request.method == 'GET':
+        lastname = request.args['lastname']
         playerBox = getPlayerBox(lastname)
         ppg = sum(playerBox.get('PTS'))/len(playerBox.index)
-	return ppg
+    return str(ppg)
 
 def getPlayerIDFromFullName(fullName):
     return players.find_players_by_last_name(fullName)[0]['id']
