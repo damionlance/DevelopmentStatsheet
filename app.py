@@ -20,6 +20,25 @@ def getPlayerPPG(firstName=None, lastName=None):
         ppg = 0
     return str(ppg)
 
+@app.route('/api/v1/report/games', methods=['GET'])
+def getReport():
+    if request.method == 'GET':
+        if 'firstName' in request.args and 'lastName' in request.args:
+            lastName = request.args['lastName']
+            firstName = request.args['firstName']
+        fullName = firstName + " " + lastName
+        playerBoxSeason = getPlayerBox(fullName)
+        if 'numGames' in request.args:
+            numGames = int(request.args['numGames'])
+        else:
+            numGames = 1
+        playerBoxLastNGames = playerBoxSeason.head(numGames)
+        playerBoxSeason = playerBoxSeason.tail(len(playerBoxSeason.index)-numGames)
+        report = generateReport(playerBoxSeason, playerBoxLastNGames, fullName)
+    else:
+        return
+    return report
+
 if __name__ == "__main__":
     app.debug=True
     app.run()
